@@ -1,3 +1,4 @@
+import os
 import sys
 import pickle
 
@@ -89,10 +90,19 @@ class AnalyzePermissions:
         return permission_requsting_methods
 
 
-if __name__=="__main__":
+def run(apk):
+    out = "/data/huseyinalecakir_data/CallGraphOutputs"
+    analyze = AnalyzePermissions(apk)
+    permission_requsting_methods = analyze.crawl()
+    with open(os.path.join(out, "{}.pickle".format(apk.replace(".apk", ""))), "wb") as target:
+        pickle.dump(permission_requsting_methods, target)
+
+"""if __name__=="__main__":
     apk = sys.argv[1]
+    out = sys.argv[2]
+
     analyze = AnalyzePermissions(apk)
     permission_requsting_methods = analyze.crawl()
 
-    with open("{}.pickle".format(apk.replace(".apk", "")), "wb") as target:
-        pickle.dump(permission_requsting_methods, target)
+    with open(os.path.join(out, "{}.pickle".format(apk.replace(".apk", ""))), "wb") as target:
+        pickle.dump(permission_requsting_methods, target)"""
