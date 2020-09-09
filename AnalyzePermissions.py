@@ -15,6 +15,7 @@ class AnalyzePermissions:
                                 'android.permission.ACCESS_COARSE_LOCATION']
         self.permission_methods = self.extract_permission_methods()
         self.limit = 15
+        self.node_cache = {}
 
     def extract_permission_methods(self):
         permission_methods = {}
@@ -63,10 +64,15 @@ class AnalyzePermissions:
 
         for class_, method_, _ in method.get_xref_to():
             if not (class_.name.startswith("Ljava/") or method_.name.startswith("log") or method_.name.startswith("<init>")):
-                child = Node(class_.name, method_.name)
-                node.childs.append(child)
-                child.parent = node
-                self.visit_method(method_, child, depth+1)
+                ckey = "{}{}".format(class_.name, method_.name)
+                if ckey not in node_cache:
+                    child = Node(class_.name, method_.name)
+                    node.childs.append(child)
+                    child.parent = node
+                    self.visit_method(method_, child, depth+1)
+                else:
+                    node.childs.append(self.node_cache[ckey])
+        self.node_cache[key] = node
 
     def crawl(self):
         root_nodes = []
