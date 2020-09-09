@@ -48,7 +48,7 @@ class AnalyzePermissions:
         return seq
 
     def visit_method(self, method, node, depth):
-        if depth > 10:
+        if depth > 30:
             return
 
         #Check permissions
@@ -94,7 +94,8 @@ def run(apk):
     out = "/data/huseyinalecakir_data/CallGraphOutputs"
     analyze = AnalyzePermissions(apk)
     permission_requsting_methods = analyze.crawl()
-    with open(os.path.join(out, "{}.pickle".format(apk.replace(".apk", ""))), "wb") as target:
+    path = os.path.join(out, "{}.pickle".format(apk.replace(".apk", "")))
+    with open(path, "wb") as target:
         pickle.dump(permission_requsting_methods, target)
 
 """if __name__=="__main__":

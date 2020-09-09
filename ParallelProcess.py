@@ -14,5 +14,4 @@ if __name__=="__main__":
     for file in os.listdir(apk_dir):
         if file.endswith(".apk"):
             apks.append(os.path.join(apk_dir, file))
-
     main(apks)
