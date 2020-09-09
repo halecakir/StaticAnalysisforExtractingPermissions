@@ -65,7 +65,7 @@ class AnalyzePermissions:
         for class_, method_, _ in method.get_xref_to():
             if not (class_.name.startswith("Ljava/") or method_.name.startswith("log") or method_.name.startswith("<init>")):
                 ckey = "{}{}".format(class_.name, method_.name)
-                if ckey not in node_cache:
+                if ckey not in self.node_cache:
                     child = Node(class_.name, method_.name)
                     node.childs.append(child)
                     child.parent = node
