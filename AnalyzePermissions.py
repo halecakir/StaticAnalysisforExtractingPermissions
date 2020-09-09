@@ -14,6 +14,7 @@ class AnalyzePermissions:
         self.permission_list = ['android.permission.ACCESS_FINE_LOCATION',
                                 'android.permission.ACCESS_COARSE_LOCATION']
         self.permission_methods = self.extract_permission_methods()
+        self.limit = 15
 
     def extract_permission_methods(self):
         permission_methods = {}
@@ -48,7 +49,7 @@ class AnalyzePermissions:
         return seq
 
     def visit_method(self, method, node, depth):
-        if depth > 30:
+        if depth > self.limit:
             return
 
         #Check permissions
