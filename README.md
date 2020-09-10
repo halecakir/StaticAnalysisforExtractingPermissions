@@ -24,7 +24,7 @@ $ python AnalyzePermissions.py input-apk-file output-file
 Analyze multiple files:
 
 ```sh
-$ python AnalyzePermissions.py input-apks-dir
+$ python AnalyzePermissions.py input-apks-dir outputs-dir
 ```
 
 ### Todos
