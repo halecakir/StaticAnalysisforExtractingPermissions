@@ -101,7 +101,8 @@ def run(apk):
     out = "/data/huseyinalecakir_data/CallGraphOutputs"
     analyze = AnalyzePermissions(apk)
     permission_requsting_methods = analyze.crawl()
-    path = os.path.join(out, "{}.pickle".format(apk.replace(".apk", "")))
+    apk_base = apk.split("/")[-1].replace(".apk", "")
+    path = os.path.join(out, "{}.pickle".format(apk_base))
     with open(path, "wb") as target:
         pickle.dump(permission_requsting_methods, target)
 
