@@ -97,8 +97,7 @@ class AnalyzePermissions:
         return permission_requsting_methods
 
 
-def run(apk):
-    out = "/data/huseyinalecakir_data/CallGraphOutputs"
+def run(apk, out):
     analyze = AnalyzePermissions(apk)
     permission_requsting_methods = analyze.crawl()
     apk_base = apk.split("/")[-1].replace(".apk", "")
